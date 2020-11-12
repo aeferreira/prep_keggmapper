@@ -1,3 +1,2 @@
 ipywidgets
 jupyter_contrib_nbextensions
-voila>=0.1.8
