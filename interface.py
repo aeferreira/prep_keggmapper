@@ -1,3 +1,4 @@
+import base64
 import ipywidgets as widgets
 
 def get_cid(data):
@@ -84,10 +85,17 @@ def start():
         #print_on_html('<br/>'.join(numbers))
         with out:
             print('\n'.join(numbers))
+            b64 = base64.b64encode(results['map'].encode())
+            payload = b64.decode()
+
         
             with open("map.txt", "w+") as a:
                 a.write(results['map'])
-            display(widgets.HTML(value='\nFile map.txt was generated. It maps KeGG IDs to colors'))
+            
+            html_button = '''File <a download="map.txt" href="data:text/txt;base64,{payload}" download> <button class="p-Widget jupyter-widgets jupyter-button widget-button mod-warning">map.txt</button></a>
+            was generated. It maps KeGG IDs to colors'''.format(payload=payload)
+
+            display(widgets.HTML(value=html_button))
             #print('\nFile demo.txt was generated. It maps KeGG IDs to colors')
 
     def on_reset_button_clicked(b):
@@ -103,7 +111,6 @@ def start():
         
         fname1.value = ''
         fname2.value = ''
-
 
     button.on_click(on_button_clicked)
     button_reset.on_click(on_reset_button_clicked)
