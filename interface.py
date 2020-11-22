@@ -1,13 +1,21 @@
 import base64
 import ipywidgets as widgets
 
-def get_cid(fname):
-    with open(fname) as data:
-        cid = []
-        for line in data:
-            ID = line.split("\t")[6]
-            if ID.startswith("C"):
-                cid.append(ID)
+# def get_cid(fname):
+#     with open(fname) as data:
+#         cid = []
+#         for line in data:
+#             ID = line.split("\t")[6]
+#             if ID.startswith("C"):
+#                 cid.append(ID)
+#     return cid
+
+def get_cid(data):
+    cid = []
+    for line in data.splitlines():
+        ID = line.split("\t")[6]
+        if ID.startswith("C"):
+            cid.append(ID)
     return cid
 
 def compute(f1_content, f2_content):
@@ -113,16 +121,16 @@ def start():
             print(f'     {name1}')
             print(f'     {name2}')
             print("Processing KeGG IDs")
-        #f1_content = f1dict["content"].decode('')
-        #f2_content = f2dict["content"].decode('')
-        fname1 = "./{}".format(name1)
-        fname2 = "./{}".format(name2)
-        with open(fname1, "wb") as fp:
-            fp.write(f1dict["content"])
-        with open(fname2, "wb") as fp:
-            fp.write(f2dict["content"])
 
-        results = compute(fname1, fname2)
+        try:
+            f1_content = f1dict["content"].decode('utf-8')
+            f2_content = f2dict["content"].decode('utf-8')
+        except UnicodeDecodeError:
+            f1_content = f1dict["content"].decode('ISO-8859-1')
+            f2_content = f2dict["content"].decode('ISO-8859-1')
+
+
+        results = compute(f1_content, f2_content)
 
         numbers = [f'<p>There are <span style="color:goldenrod;">{results["n_common"]}</span> common KeGG IDs in both files</p>',
                 f'<p>There are <span style="color:darkgreen;">{results["n1"]}</span> exclusive KeGG IDs in file <span style="color:darkgreen;">{name1}</span></p>',
