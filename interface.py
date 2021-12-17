@@ -42,7 +42,7 @@ def compute(f1_content, f2_content):
         if compound in both:
             color = 'yellow'
         elif compound in set1:
-            color = 'green'
+            color = 'blue'
         else:
             color = 'red'
 
@@ -63,7 +63,7 @@ def start():
 
     colorcodes = widgets.HTML(value='''
     <ul><li><span style="color:goldenrod;">yellow</span> - compounds present in both files</li>
-    <li><span style="color:darkgreen;">green</span> - compounds present only in the first file</li>
+    <li><span style="color:darkblue;">blue</span> - compounds present only in the first file</li>
     <li><span style="color:red;">red</span> - compounds present only in the second file</li></ul>''')
 
     credits = widgets.HTML(value='''<p>Tool developed by António Ferreira, Alexandre Coelho and Henrique Silva</p>''')
