@@ -81,7 +81,7 @@ def start():
         newvalue = change['new']
         if len(newvalue) == 1:
             [newname] = newvalue
-            fname1.value = f'<b style="color:darkgreen;">{newname}</b>'
+            fname1.value = f'<b style="color:darkblue;">{newname}</b>'
         else:
             fname1.value = f''
 
@@ -133,7 +133,7 @@ def start():
         results = compute(f1_content, f2_content)
 
         numbers = [f'<p>There are <span style="color:goldenrod;">{results["n_common"]}</span> common KeGG IDs in both files</p>',
-                f'<p>There are <span style="color:darkgreen;">{results["n1"]}</span> exclusive KeGG IDs in file <span style="color:darkgreen;">{name1}</span></p>',
+                f'<p>There are <span style="color:darkblue;">{results["n1"]}</span> exclusive KeGG IDs in file <span style="color:darkblue;">{name1}</span></p>',
                 f'<p>There are <span style="color:red;">{results["n2"]}</span> exclusive KeGG IDs in file <span style="color:red;">{name2}</span></p>']
         #print_on_html('<br/>'.join(numbers))
 
