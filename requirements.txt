@@ -1,4 +1,2 @@
-ipywidgets
-voila
-voila-material
+ipywidgets ~= 7.5
 jupyter_contrib_nbextensions
